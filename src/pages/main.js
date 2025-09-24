@@ -84,7 +84,7 @@ const LandingPage = () => {
         />
       </div>
 
-      {showPiano && <PianoModel />} {/* 최종 상태에서 피아노 표시 */}
+      {showPiano && <PianoModel />} 
     </>
   );
 };

@@ -7,18 +7,17 @@ const fadeIn = keyframes`
   100% { transform: translateY(0); opacity: 1; }
 `;
 
-// 헤더 바로 아래까지만 Overlay 높이를 제한
 const Overlay = styled.div`
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
-  height: calc(100% - 81px); // 헤더 높이만큼 빼기
-  margin-top: 81px; // 헤더 높이
+  height: calc(100% - 81px);
+  margin-top: 81px;
   background: #f7f7f7;
   display: flex;
   flex-direction: column;
-  justify-content: flex-start; // 위쪽부터 배치
+  justify-content: flex-start;
   align-items: center;
   animation: ${fadeIn} 1s ease forwards;
   z-index: 1000;
@@ -90,14 +89,13 @@ const Note = styled.img`
   transition: none;
 `;
 
-// TextBoxFooter (부모)
 const TextBoxFooter = styled.div`
   position: absolute;
   bottom: 1rem;
   left: 0;
   width: 100%;
   display: flex;
-  justify-content: space-between; // 양쪽 끝으로 배치
+  justify-content: space-between;
   font-family: "timeline-210", sans-serif;
   font-weight: 400;
   font-size: 1.5rem;
@@ -114,25 +112,52 @@ const TextBoxFooterRight = styled.div`
   margin-right: 4rem;
 `;
 
-
 const ButtonBg = styled.img`
-  margin-top: 21rem;
+  margin-top: 1.5rem;
   width: 20rem;
   height: auto;
-  z-index: 0;  // 버튼보다 뒤에 있도록
+  z-index: 0;
   position: relative;
 `;
 
 const ButtonContainer = styled.div`
   display: flex;
   gap: 3rem;
-  margin-top: -4.5rem; // 배경 이미지 위쪽에 버튼 위치
-  z-index: 1; // ButtonBg보다 위에
+  margin-top: -4.5rem;
+  z-index: 1;
+`;
+
+const ColorButtonContainer = styled.div`
+  display: flex;
+  flex-direction: column; // 수직 배치
+  gap: 0.5rem; // 버튼 그룹과 텍스트 사이의 간격
+  margin-top: 14.5rem;
+  align-items: center; // 가로축 중앙 정렬
+`;
+
+const ButtonsWrapper = styled.div`
+  display: flex;
+  gap: 2rem;
+  align-items: center;
+`;
+
+const SelectColor = styled.p`
+  font-size: 1.5rem;
+  color: #a1a1a1;
+  margin-top: 0.5rem;
+`
+
+const ColorButton = styled.img`
+  width: 100%;
+  cursor: pointer;
+  border-bottom: ${({ isSelected }) => (isSelected ? "5px solid #a1a1a1" : "none")};
+  padding: 0.2rem;
 `;
 
 const Name = ({ text, onClose }) => {
   const [name, setName] = useState("");
   const [randomPositions, setRandomPositions] = useState([]);
+  const [selectedColor, setSelectedColor] = useState("pink");
 
   useEffect(() => {
     const input = document.getElementById("hidden-input");
@@ -156,14 +181,20 @@ const Name = ({ text, onClose }) => {
     return largeNotes.includes(char.toLowerCase()) ? "small" : "large";
   };
 
-  const letterToImage = (letter) => `/images/notes/${letter.toLowerCase()}.png`;
+  const letterToImage = (letter, color) => {
+    const baseName = letter.toLowerCase();
+    if (color === "black") {
+      return `/images/notes_b/${baseName}_b.png`;
+    } else {
+      return `/images/notes/${baseName}.png`;
+    }
+  };
 
   const handleTextBoxClick = () => {
     const input = document.getElementById("hidden-input");
     if (input) input.focus();
   };
 
-  // 부모에서 받은 onClose 실행
   const handlePrev = () => {
     if (onClose) onClose();
     console.log("이전 컴포넌트로 이동");
@@ -185,7 +216,7 @@ const Name = ({ text, onClose }) => {
               {name.split("").map((char, i) => (
                 <Note
                   key={`${char}-${i}`}
-                  src={letterToImage(char)}
+                  src={letterToImage(char, selectedColor)}
                   noteType={getNoteType(char)}
                   randomY={randomPositions[i] || 0}
                 />
@@ -198,6 +229,25 @@ const Name = ({ text, onClose }) => {
             <TextBoxFooterRight>{name.length} / 10 words</TextBoxFooterRight>
           </TextBoxFooter>
         </TextBox>
+
+        {/* 여기에 ColorButtonContainer 추가 */}
+        <ColorButtonContainer>
+        <ButtonsWrapper>
+          <ColorButton
+            src="/images/pink.svg"
+            onClick={() => setSelectedColor("pink")}
+            isSelected={selectedColor === "pink"}
+            alt="Pink color"
+          />
+          <ColorButton
+            src="/images/black.svg"
+            onClick={() => setSelectedColor("black")}
+            isSelected={selectedColor === "black"}
+            alt="Black color"
+          />
+        </ButtonsWrapper>
+          <SelectColor>Select Color</SelectColor>
+        </ColorButtonContainer>
 
         <ButtonBg src="/images/buttonBg.svg" alt="Button bg" />
         <ButtonContainer>
