@@ -22,7 +22,7 @@ const Model = ({
 
   useFrame(({ clock }, delta) => {
     if (modelRef.current) {
-      // 속도 인자 적용
+     
       const upSpeedFactor = floatConfig.upSpeedFactor ?? 2.0;
       const downSpeedFactor = floatConfig.downSpeedFactor ?? 1.0;
       const baseSpeed = floatConfig.speed;
