@@ -2,7 +2,7 @@
 import './App.css';
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import './styles/font.css';
-import MainPage from "./pages/Main";
+import MainPage from "./pages/main";
 import Header from "./components/Header";
 // import About from "./pages/About";
 import HowTo from "./pages/HowTo";

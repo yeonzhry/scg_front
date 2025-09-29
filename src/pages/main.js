@@ -19,7 +19,7 @@ const LandingPage = () => {
     const backgroundOverlay = document.getElementById("background-overlay");
     const body = document.body;
 
-    // 1~8번 애니메이션 그대로...
+    
     setTimeout(() => onboarding.style.gap = "80px", 300);
     setTimeout(() => originalImg.style.opacity = "1", 1200);
     setTimeout(() => sideImgs.forEach(img => img.style.opacity = "1"), 1600);
