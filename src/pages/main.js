@@ -1,12 +1,14 @@
 import React, { useEffect, useState } from "react";
 import Header from "../components/Header";
 import "../styles/main.css";
-import PianoModel from "../components/PianoModel"; // 새로 만든 컴포넌트 import
+import PianoModel from "../components/PianoModel"; 
 
 const LandingPage = () => {
   const [showPiano, setShowPiano] = useState(false);
 
   useEffect(() => {
+    document.body.classList.add('main-page');
+    document.documentElement.classList.add('main-html');
     const onboarding = document.querySelector(".onboarding-line");
     const originalImg = document.getElementById("original-img");
     const newImgContainer = document.getElementById("new-img-container");
@@ -30,19 +32,25 @@ const LandingPage = () => {
       extraImg2.classList.add("show");
     }, 5000);
 
-    // 최종 상태 + 피아노 표시
+    
     setTimeout(() => {
       body.classList.add("final-state");
       setShowPiano(true);
     }, 5000);
+
+    return () => {
+      document.body.classList.remove('main-page');
+      document.body.classList.remove('final-state');
+      document.documentElement.classList.remove('main-html');
+    };
   }, []);
 
   return (
     <>
       <Header />
-      <div className="background-overlay" id="background-overlay"></div>
+      <div className="background-overlay" id="background-overlay" style={{zIndex:1001}}></div>
 
-      <div className="container" id="container">
+      <div className="container" id="container" style={{zIndex:1002}}>
         <div className="onboarding-line">
           <img src="./images/1.svg" className="side-img left" alt="left text" />
           <img src="./images/2.svg" className="bracket-img" alt="left bracket" />

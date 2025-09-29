@@ -10,27 +10,15 @@ const GlobalStyle = createGlobalStyle`
   word-break: keep-all;
   padding: 0;
   margin: 0;
+  background-color: #f8f8f8;
 }
 
-/* html {
-  scroll-behavior: smooth;
-  font-size: 62.5%;
-}
+
 
 body {
-  min-height: 100vh;
-  background-color: var(--background-1);
-  overflow-x: hidden;
-  font-family: 'Pretendard', sans-serif;
-  font-weight: 400;
-  color: var(--neutral-90);
-}
+  background-color: #f8f8f8;
 
-button {
-  background: none;
-  border: none;
-  cursor: pointer;
-} */
+}
 
 :root {
   /* 🎨 Main Colors */

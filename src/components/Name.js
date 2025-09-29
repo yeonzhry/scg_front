@@ -129,10 +129,10 @@ const ButtonContainer = styled.div`
 
 const ColorButtonContainer = styled.div`
   display: flex;
-  flex-direction: column; // 수직 배치
-  gap: 0.5rem; // 버튼 그룹과 텍스트 사이의 간격
+  flex-direction: column; 
+  gap: 0.5rem; 
   margin-top: 14.5rem;
-  align-items: center; // 가로축 중앙 정렬
+  align-items: center; 
 `;
 
 const ButtonsWrapper = styled.div`

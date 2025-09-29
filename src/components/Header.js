@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-// import logo from "../../assets/images/logo.svg";
+import { Link } from "react-router-dom";
 
 const HeaderWrapper = styled.header`
   position: fixed;
@@ -13,7 +13,7 @@ const HeaderWrapper = styled.header`
   justify-content: space-between;
   align-items: center;
   border-bottom: 1px solid #121212;
-
+  z-index: 1000;
 `;
 
 const Logo = styled.div`
@@ -33,7 +33,7 @@ const NavMenu = styled.nav`
     list-style: none;
     margin-right: 50px;
     padding-top: 20px;
-    gap: 30px;
+    gap: 50px;
   }
 
   li {
@@ -56,13 +56,15 @@ const Header = () => {
   return (
     <HeaderWrapper>
       <Logo>
-        <img src="./images/logo.svg" alt="Logo" />
+      <Link to="/"> 
+          <img src="./images/logo.svg" alt="Logo" />
+      </Link>
       </Logo>
       <NavMenu>
         <ul>
-          <li><a href="#about">( About )</a></li>
-          <li><a href="#howto">( How to? )</a></li>
-          <li><a href="#archive">( Archive )</a></li>
+          <li><Link to="/about">( About )</Link></li>
+          <li><Link to="/howto">( How to? )</Link></li>
+          <li><Link to="/archive">( Archive )</Link></li>
         </ul>
       </NavMenu>
     </HeaderWrapper>
