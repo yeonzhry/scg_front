@@ -1,4 +1,6 @@
+// src/components/Name.jsx
 import React, { useState, useEffect } from "react";
+import ReactDOM from "react-dom"; 
 import styled, { keyframes } from "styled-components";
 import Header from "./Header";
 
@@ -20,8 +22,8 @@ const Overlay = styled.div`
   justify-content: flex-start;
   align-items: center;
   animation: ${fadeIn} 1s ease forwards;
-  z-index: 1000;
   padding-top: 2rem;
+  z-index: 99999; /* 최상단 */
 `;
 
 const HiddenInput = styled.input`
@@ -145,7 +147,7 @@ const SelectColor = styled.p`
   font-size: 1.5rem;
   color: #a1a1a1;
   margin-top: 0.5rem;
-`
+`;
 
 const ColorButton = styled.img`
   width: 100%;
@@ -204,7 +206,7 @@ const Name = ({ text, onClose }) => {
     console.log("다음 컴포넌트로 이동");
   };
 
-  return (
+  const content = (
     <>
       <Header zIndex="500" />
       <Overlay>
@@ -230,22 +232,21 @@ const Name = ({ text, onClose }) => {
           </TextBoxFooter>
         </TextBox>
 
-        {/* 여기에 ColorButtonContainer 추가 */}
         <ColorButtonContainer>
-        <ButtonsWrapper>
-          <ColorButton
-            src="/images/pink.svg"
-            onClick={() => setSelectedColor("pink")}
-            isSelected={selectedColor === "pink"}
-            alt="Pink color"
-          />
-          <ColorButton
-            src="/images/black.svg"
-            onClick={() => setSelectedColor("black")}
-            isSelected={selectedColor === "black"}
-            alt="Black color"
-          />
-        </ButtonsWrapper>
+          <ButtonsWrapper>
+            <ColorButton
+              src="/images/pink.svg"
+              onClick={() => setSelectedColor("pink")}
+              isSelected={selectedColor === "pink"}
+              alt="Pink color"
+            />
+            <ColorButton
+              src="/images/black.svg"
+              onClick={() => setSelectedColor("black")}
+              isSelected={selectedColor === "black"}
+              alt="Black color"
+            />
+          </ButtonsWrapper>
           <SelectColor>Select Color</SelectColor>
         </ColorButtonContainer>
 
@@ -282,6 +283,9 @@ const Name = ({ text, onClose }) => {
       </Overlay>
     </>
   );
+
+  // Portal로 body 최상단에 렌더링
+  return ReactDOM.createPortal(content, document.body);
 };
 
 export default Name;
